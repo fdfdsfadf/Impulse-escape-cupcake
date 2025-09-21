@@ -1,9 +1,16 @@
 const express = require('express');
+const path = require('path');
 const app = express();
-app.use(express.static('public')); // move index.html and assets to /public
+const PORT = process.env.PORT || 3000;
 
-app.get('/api/message', (req, res) => {
-  res.json({ text: 'Cupcake says hello!' });
+// Serve static files from the current directory
+app.use(express.static(__dirname));
+
+// Optional: Add a dynamic route
+app.get('/api/ping', (req, res) => {
+  res.json({ message: 'Impulse Cupcake is alive!' });
 });
 
-app.listen(3000, () => console.log('Server running on http://localhost:3000'));
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});

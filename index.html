@@ -192,5 +192,12 @@ document.addEventListener("keyup", function(e) {
   }
 });
 </script>
+<script>
+  fetch('/api/message')
+    .then(res => res.json())
+    .then(data => alert(data.text));
+</script>
+
+
 </body>
 </html>

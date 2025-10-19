@@ -110,44 +110,50 @@ function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
+            clearInterval(myGameArea.interval); // Stop game loop
+            showTryAgainButton();               // Show button
             return;
         } 
     }
+
     myGameArea.clear();
     ctx = myGameArea.context;
-let bg = document.getElementById("background");
+    let bg = document.getElementById("background");
 
-// scroll the background
-backgroundX -= 1; // Speed of scroll
-if (backgroundX <= -myGameArea.canvas.width) {
-    backgroundX = 0;
-}
+    // scroll the background
+    backgroundX -= 1; // Speed of scroll
+    if (backgroundX <= -myGameArea.canvas.width) {
+        backgroundX = 0;
+    }
 
-// draw two copies of the image side-by-side
-ctx.drawImage(bg, backgroundX, 0, myGameArea.canvas.width, myGameArea.canvas.height);
-ctx.drawImage(bg, backgroundX + myGameArea.canvas.width, 0, myGameArea.canvas.width, myGameArea.canvas.height);
+    // draw two copies of the image side-by-side
+    ctx.drawImage(bg, backgroundX, 0, myGameArea.canvas.width, myGameArea.canvas.height);
+    ctx.drawImage(bg, backgroundX + myGameArea.canvas.width, 0, myGameArea.canvas.width, myGameArea.canvas.height);
 
     myGameArea.frameNo += 1;
     if (myGameArea.frameNo == 1 || everyinterval(150)) {
         x = myGameArea.canvas.width;
         minHeight = 20;
         maxHeight = 200;
-        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+        height = Math.floor(Math.random() * (maxHeight - minHeight + 1) + minHeight);
         minGap = 50;
         maxGap = 200;
-        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+        gap = Math.floor(Math.random() * (maxGap - minGap + 1) + minGap);
         myObstacles.push(new component(10, height, "saddlebrown", x, 0));
         myObstacles.push(new component(10, x - height - gap, "saddlebrown", x, height + gap));
     }
+
     for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].x += -1;
         myObstacles[i].update();
     }
-    myScore.text="SCORE: " + myGameArea.frameNo;
+
+    myScore.text = "SCORE: " + myGameArea.frameNo;
     myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
 }
+
 
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}

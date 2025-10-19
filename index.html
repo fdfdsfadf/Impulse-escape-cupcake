@@ -21,6 +21,7 @@ var myObstacles = [];
 var myScore;
 var backgroundX = 0;
 var gameOver = false;
+var gameOver = false;
 
 // starting stuff
 function startGame() {
@@ -113,11 +114,19 @@ function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
-            clearInterval(myGameArea.interval); // Stop game loop
-            showTryAgainButton();               // Show button
+            clearInterval(myGameArea.interval);
+            gameOver = true;
+            myGameArea.canvas.addEventListener("click", handleRestartClick);
+             // Show button
             return;
         } 
     }
+
+    if (gameOver) {
+        const buttonImg = document.getElementById("tryAgain");
+        ctx.drawImage(buttonImg, myGameArea.canvas.width / 2 - 75, myGameArea.canvas.height / 2 - 37, 150, 75);
+    }
+
 
     myGameArea.clear();
     ctx = myGameArea.context;

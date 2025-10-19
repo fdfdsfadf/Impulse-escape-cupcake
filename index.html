@@ -15,11 +15,14 @@ canvas {
 <img id="tryAgain" src="try-again.png" style="display:none;">
 <script>
 
+ // variables don't touch
 var myGamePiece;
 var myObstacles = [];
 var myScore;
 var backgroundX = 0;
+var gameOver = false;
 
+// starting stuff
 function startGame() {
     myGamePiece = new component(30, 30, "cupcake", 10, 120);
     myGamePiece.gravity = 0.05;
@@ -188,6 +191,7 @@ function toggleFullscreen() {
 }
 </script>
 <script>
+        // press space or arrow thing instead of pressing accellerate
 document.addEventListener("keydown", function(e) {
   if (e.code === "Space" || e.code === "ArrowUp") {
     accelerate(-0.2); // simulate button hold

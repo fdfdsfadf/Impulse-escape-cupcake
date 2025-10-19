@@ -199,6 +199,50 @@ document.addEventListener("keyup", function(e) {
   }
 });
 </script>
+<script>
+function showTryAgainButton() {
+    const canvas = myGameArea.canvas;
+    const ctx = myGameArea.context;
+    const buttonImg = document.getElementById("tryAgain");
+
+    // Draw the button centered
+    ctx.drawImage(buttonImg, canvas.width / 2 - 50, canvas.height / 2 - 25, 100, 50);
+
+    // Listen for click
+    canvas.addEventListener("click", handleRestartClick);
+}
+</script>
+<script>
+function handleRestartClick(e) {
+    const canvas = myGameArea.canvas;
+    const rect = canvas.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const clickY = e.clientY - rect.top;
+
+    const btnX = canvas.width / 2 - 50;
+    const btnY = canvas.height / 2 - 25;
+    const btnW = 100;
+    const btnH = 50;
+
+    if (clickX >= btnX && clickX <= btnX + btnW &&
+        clickY >= btnY && clickY <= btnY + btnH) {
+        
+        canvas.removeEventListener("click", handleRestartClick);
+        restartGame();
+    }
+}
+</script>
+<script>
+function restartGame() {
+    myObstacles = [];
+    backgroundX = 0;
+    myGameArea.frameNo = 0;
+    myGamePiece = new component(30, 30, "cupcake", 10, 120);
+    myGamePiece.gravity = 0.05;
+    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myGameArea.interval = setInterval(updateGameArea, 20);
+}
+</script>
 
 
 </body>

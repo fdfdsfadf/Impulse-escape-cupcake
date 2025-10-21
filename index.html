@@ -28,7 +28,6 @@ const btnH = 75;
 const btnX = 480 / 2 - btnW / 2;
 const btnY = 270 / 2 - btnH / 2;
 
-
     
 // starting stuff
 function startGame() {
@@ -41,10 +40,9 @@ function startGame() {
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 1280;
-        this.canvas.height = 720;
+        this.canvas.width = 480;
+        this.canvas.height = 270;
         this.context = this.canvas.getContext("2d");
-        this.context.imageSmoothingEnabled = true;
         this.context.imageSmoothingQuality = "high";
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -309,15 +307,6 @@ function restartGame() {
 }
 </script>
 
-<script>
-window.onload = () => {
-  const canvas = myGameArea.canvas;
-  if (canvas.requestFullscreen) {
-    canvas.requestFullscreen();
-  }
-  startGame();
-};
-</script>    
 
 </body>
 </html>

@@ -119,10 +119,31 @@ function updateGameArea() {
     var x, height, gap, minHeight, maxHeight, minGap, maxGap;
     for (i = 0; i < myObstacles.length; i += 1) {
         if (myGamePiece.crashWith(myObstacles[i])) {
+            // stop the game loop
             clearInterval(myGameArea.interval);
             gameOver = true;
+            // add click handler to restart
             myGameArea.canvas.addEventListener("click", handleRestartClick);
-             // Show button
+
+            // draw the Try Again button immediately (wait for image load if needed)
+            const ctx = myGameArea.context;
+            const buttonImg = document.getElementById("tryAgain");
+            const btnX = myGameArea.canvas.width / 2 - 75;
+            const btnY = myGameArea.canvas.height / 2 - 37;
+            const btnW = 150;
+            const btnH = 75;
+            function drawBtn() {
+                // draw on top of the current canvas content
+                ctx.drawImage(buttonImg, btnX, btnY, btnW, btnH);
+            }
+            if (buttonImg.complete) {
+                drawBtn();
+            } else {
+                // ensure it's drawn once loaded
+                buttonImg.onload = drawBtn;
+            }
+
+            // exit updateGameArea so we don't continue drawing game objects in this frame
             return;
         } 
     }
@@ -223,8 +244,20 @@ function showTryAgainButton() {
     const ctx = myGameArea.context;
     const buttonImg = document.getElementById("tryAgain");
 
-    // Draw the button centered
-    ctx.drawImage(buttonImg, canvas.width / 2 - 50, canvas.height / 2 - 25, 100, 50);
+    // Use the same coordinates and size as the click handler expects
+    const btnX = canvas.width / 2 - 75;
+    const btnY = canvas.height / 2 - 37;
+    const btnW = 150;
+    const btnH = 75;
+
+    function drawBtn() {
+        ctx.drawImage(buttonImg, btnX, btnY, btnW, btnH);
+    }
+    if (buttonImg.complete) {
+        drawBtn();
+    } else {
+        buttonImg.onload = drawBtn;
+    }
 
     // Listen for click
     canvas.addEventListener("click", handleRestartClick);

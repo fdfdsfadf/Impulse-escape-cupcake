@@ -158,15 +158,13 @@ function updateGameArea() {
     myScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
+
+// new sort of new part thingy
+    if (gameOver) {
+        const buttonImg = document.getElementById("tryAgain");
+        ctx.drawImage(buttonImg, myGameArea.canvas.width / 2 - 75, myGameArea.canvas.height / 2 - 37, 150, 75);
 }
-
-// new section part thingy
-if (gameOver) {
-    const buttonImg = document.getElementById("tryAgain");
-    ctx.drawImage(buttonImg, myGameArea.canvas.width / 2 - 75, myGameArea.canvas.height / 2 - 37, 150, 75);
-}
-
-
+    
 
 function everyinterval(n) {
     if ((myGameArea.frameNo / n) % 1 == 0) {return true;}

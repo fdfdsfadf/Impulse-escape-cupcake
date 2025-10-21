@@ -13,6 +13,7 @@ canvas {
 <img id="background" src="garden.jpg" style="display:none;">
 <img id="cupcake" src="cupcake.png" style="display:none;">
 <img id="tryAgain" src="try-again.png" style="display:none;">
+<audio id="bgMusic" src="music.mp3" loop></audio>
 <script>
 
  // variables don't touch
@@ -294,8 +295,28 @@ function handleRestartClick(e) {
     }
 }
 </script>
+
+<script>
+// music
+function startGame() {
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.5; // adjust volume from 0.0 to 1.0
+    music.play();
+
+    myGamePiece = new component(30, 30, "cupcake", 10, 120);
+    myGamePiece.gravity = 0.05;
+    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myGameArea.start();
+}
+    
+</script>
+    
 <script>
 function restartGame() {
+    const music = document.getElementById("bgMusic");
+    music.currentTime = 0;
+    music.play();
+    
     gameOver = false;
     myObstacles = [];
     backgroundX = 0;

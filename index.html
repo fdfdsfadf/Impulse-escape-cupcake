@@ -122,12 +122,7 @@ function updateGameArea() {
         } 
     }
 
-    if (gameOver) {
-        const buttonImg = document.getElementById("tryAgain");
-        ctx.drawImage(buttonImg, myGameArea.canvas.width / 2 - 75, myGameArea.canvas.height / 2 - 37, 150, 75);
-    }
-
-
+    // game area if you are putting stuff in here put it after this block otherwise ur cooked 💀
     myGameArea.clear();
     ctx = myGameArea.context;
     let bg = document.getElementById("background");
@@ -165,6 +160,13 @@ function updateGameArea() {
     myGamePiece.newPos();
     myGamePiece.update();
 }
+
+// new section part thingy
+if (gameOver) {
+    const buttonImg = document.getElementById("tryAgain");
+    ctx.drawImage(buttonImg, myGameArea.canvas.width / 2 - 75, myGameArea.canvas.height / 2 - 37, 150, 75);
+}
+
 
 
 function everyinterval(n) {

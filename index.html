@@ -214,6 +214,7 @@ function accelerate(n) {
 <br>
 <button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
 <button onclick="toggleFullscreen()">FULLSCREEN</button>
+<button onclick="toggleMusic()">MUTE</button>
 <p>Use the ACCELERATE button, space bar or arrow key to stay in the air</p>
 <p>How long can you stay alive?</p>
 <p>Game created by Hugo Nguyen</p>
@@ -300,7 +301,7 @@ function handleRestartClick(e) {
 // music
 function startGame() {
     const music = document.getElementById("bgMusic");
-    music.volume = 0.5; // adjust volume from 0.0 to 1.0
+    music.volume = 0.5; // volume adjuust
     music.play();
 
     myGamePiece = new component(30, 30, "cupcake", 10, 120);
@@ -309,6 +310,13 @@ function startGame() {
     myGameArea.start();
 }
     
+</script>
+<script>
+// music button
+function toggleMusic() {
+    const music = document.getElementById("bgMusic");
+    music.muted = !music.muted;
+}
 </script>
     
 <script>

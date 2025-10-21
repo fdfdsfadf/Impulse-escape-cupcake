@@ -234,8 +234,11 @@ function showTryAgainButton() {
 function handleRestartClick(e) {
     const canvas = myGameArea.canvas;
     const rect = canvas.getBoundingClientRect();
-    const clickX = e.clientX - rect.left;
-    const clickY = e.clientY - rect.top;
+
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const clickX = (e.clientX - rect.left) * scaleX;
+    const clickY = (e.clientY - rect.top) * scaleY;
 
     const btnX = canvas.width / 2 - 75;
     const btnY = canvas.height / 2 - 37;
